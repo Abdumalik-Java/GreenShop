@@ -2,6 +2,7 @@
 Backend: Java Spring Boot
 Database: PostgreSQL
 Security: Spring Security
+
 🚀 Installation & Setup
 
 Prerequisites
