@@ -22,35 +22,35 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN','/USER')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
     public HttpEntity<?> readAll() {
         List<Product> products = productService.readAll();
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN','/USER')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
     public HttpEntity<?> readById(@PathVariable UUID id) {
         Product product = productService.readById(id);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN')")
     public HttpEntity<?> create(@RequestBody ProductDto productDto) {
         Result result = productService.create(productDto);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN')")
     public HttpEntity<?> update(@PathVariable UUID id, @RequestBody ProductDto productDto) {
         Result update = productService.update(productDto, id);
         return new ResponseEntity<>(update, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN')")
     public HttpEntity<?> delete(@PathVariable UUID id) {
         Result delete = productService.delete(id);
         return new ResponseEntity<>(delete, HttpStatus.OK);

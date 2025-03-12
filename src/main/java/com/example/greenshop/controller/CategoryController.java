@@ -22,42 +22,42 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN','/USER')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
     public HttpEntity<?> readAll() {
         List<Category> all = categoryService.readAll();
         return new ResponseEntity<>(all, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN','/USER')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
     public HttpEntity<?> readOne(@PathVariable UUID id) {
         Category category = categoryService.readById(id);
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
     @GetMapping("/{name}")
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN','/USER')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
     public HttpEntity<?> readByName(@PathVariable String name) {
         Category category = categoryService.readByName(name);
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN')")
     public HttpEntity<?> create(@RequestBody CategoryDto categoryDto) {
         Result result = categoryService.create(categoryDto);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN')")
     public HttpEntity<?> update(@PathVariable UUID id, @RequestBody CategoryDto categoryDto) {
         Result update = categoryService.update(categoryDto, id);
         return new ResponseEntity<>(update, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN')")
     public HttpEntity<?> delete(@PathVariable UUID id) {
         Result delete = categoryService.delete(id);
         return new ResponseEntity<>(delete, HttpStatus.OK);

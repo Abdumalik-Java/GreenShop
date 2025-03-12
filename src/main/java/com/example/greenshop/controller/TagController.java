@@ -22,35 +22,35 @@ public class TagController {
     TagService tagService;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN','/USER')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
     public HttpEntity<?> readAll() {
         List<Tag> tags = tagService.getTags();
         return new ResponseEntity<>(tags, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN','/USER')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
     public HttpEntity<?> readOne(@PathVariable UUID id) {
         Tag tag = tagService.getTagById(id);
         return new ResponseEntity<>(tag, HttpStatus.OK);
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN','/USER')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
     public HttpEntity<?> create(@RequestBody TagDto tagDto) {
         Result tag = tagService.createTag(tagDto);
         return new ResponseEntity<>(tag, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN','/USER')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
     public HttpEntity<?> update(@PathVariable UUID id, @RequestBody TagDto tagDto) {
         Result tag = tagService.updateTag(id, tagDto);
         return new ResponseEntity<>(tag, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN','/USER')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
     public HttpEntity<?> delete(@PathVariable UUID id) {
         Result tag = tagService.deleteTag(id);
         return new ResponseEntity<>(tag, HttpStatus.OK);

@@ -22,35 +22,35 @@ public class ShoppingCardController {
     ShoppingCardService shoppingCardService;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN','/USER')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
     public HttpEntity<?> readAll() {
         List<ShoppingCard> all = shoppingCardService.findAll();
         return new ResponseEntity<>(all, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN','/USER')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
     public HttpEntity<?> readOne(@PathVariable UUID id) {
         ShoppingCard byId = shoppingCardService.findById(id);
         return new ResponseEntity<>(byId, HttpStatus.OK);
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN')")
     public HttpEntity<?> create(@RequestBody ShoppingCardDto shoppingCardDto) {
         Result result = shoppingCardService.create(shoppingCardDto);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN','/USER')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
     public HttpEntity<?> update(@PathVariable UUID id, @RequestBody ShoppingCardDto shoppingCardDto) {
         Result update = shoppingCardService.update(shoppingCardDto, id);
         return new ResponseEntity<>(update, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('/SUPERADMIN','/ADMIN','/USER')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
     public HttpEntity<?> delete(@PathVariable UUID id) {
         Result delete = shoppingCardService.delete(id);
         return new ResponseEntity<>(delete, HttpStatus.OK);
