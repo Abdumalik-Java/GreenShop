@@ -50,7 +50,7 @@ public class OrderController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN')")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public HttpEntity<?> delete(@PathVariable UUID id) {
         Result delete = service.delete(id);
         return new ResponseEntity<>(delete, HttpStatus.OK);

@@ -50,7 +50,7 @@ public class LikeController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
+    @PreAuthorize("hasRole('USER')")
     public HttpEntity<?> delete(@PathVariable UUID id) {
         Result like = likeService.deleteLike(id);
         return new ResponseEntity<>(like, HttpStatus.OK);

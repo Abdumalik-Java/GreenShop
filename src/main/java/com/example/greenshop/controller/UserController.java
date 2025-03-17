@@ -29,21 +29,21 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN')")
     public HttpEntity<?> readById(@PathVariable UUID id) {
         User byId = service.getById(id);
         return new ResponseEntity<>(byId, HttpStatus.OK);
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
+    @PreAuthorize("hasRole('USER')")
     public HttpEntity<?> create(@RequestBody UserDto userDto) {
         Result user = service.createUser(userDto);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public HttpEntity<?> update(@PathVariable UUID id, @RequestBody UserDto userDto) {
         Result result = service.updateUser(userDto, id);
         return new ResponseEntity<>(result, HttpStatus.OK);

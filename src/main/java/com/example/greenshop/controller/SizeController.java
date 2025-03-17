@@ -43,7 +43,7 @@ public class SizeController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN')")
     public HttpEntity<?> update(@PathVariable UUID id, @RequestBody SizeDto dto) {
         Result update = sizeService.update(id, dto);
         return new ResponseEntity<>(update, HttpStatus.OK);

@@ -50,7 +50,7 @@ public class PaymentController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN')")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public HttpEntity<?> delete(@PathVariable UUID id) {
         Result result = paymentService.delete(id);
         return new ResponseEntity<>(result, HttpStatus.OK);

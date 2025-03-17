@@ -29,7 +29,7 @@ public class AddressController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN')")
     public HttpEntity<?> readOne(@PathVariable UUID id) {
         Address address = addressService.getAddressById(id);
         return new ResponseEntity<>(address, HttpStatus.OK);

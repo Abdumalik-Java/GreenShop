@@ -29,14 +29,14 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN')")
     public HttpEntity<?> readOne(@PathVariable UUID id) {
         Category category = categoryService.readById(id);
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
     @GetMapping("/{name}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN','USER')")
+    @PreAuthorize("hasAnyRole('SUPERADMIN','ADMIN')")
     public HttpEntity<?> readByName(@PathVariable String name) {
         Category category = categoryService.readByName(name);
         return new ResponseEntity<>(category, HttpStatus.OK);
