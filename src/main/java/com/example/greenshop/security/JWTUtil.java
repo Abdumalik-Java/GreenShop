@@ -16,9 +16,6 @@ import lombok.NoArgsConstructor;
 
 import javax.crypto.SecretKey;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class JWTUtil {
 
     private static final int tokenLiveTime = 1000 * 3600 * 24;

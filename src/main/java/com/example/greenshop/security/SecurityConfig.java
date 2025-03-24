@@ -9,22 +9,33 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.List;
+import java.util.UUID;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
-
     @Bean
-    public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
-        provider.setPasswordEncoder(passwordEncoder);
-        return provider;
+    public AuthenticationProvider authenticationProvider() {
+        // authentication
+        String password = UUID.randomUUID().toString();
+        System.out.println("User Password : " + password);
+
+        UserDetails user = User.builder()
+                .username("user")
+                .password("{noop}" + password)
+                .roles("USER")
+                .build();
+
+        final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(new InMemoryUserDetailsManager(user));
+        return authenticationProvider;
     }
 
     @Bean
