@@ -21,9 +21,9 @@ import java.util.UUID;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
+
     @Bean
     public AuthenticationProvider authenticationProvider() {
-        // authentication
         String password = UUID.randomUUID().toString();
         System.out.println("User Password : " + password);
 
